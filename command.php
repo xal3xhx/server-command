@@ -31,21 +31,65 @@
 </form>
 
 <?php
-// checks if button is pressed
-if(array_key_exists('RUN',$_POST))  {
-  $command = $_POST['command'];
-  $instanceId = $_POST['Server'];
-  echo $instanceId;
-  if ($instanceId == "All") {runcommand($command, $token);}
-    else {runcommand($command, $token, $instanceId);}
+if(array_key_exists('RUN',$_POST)) {
+  $Server = $_POST['Server'];
+  if(empty($Server)) {
+    echo("You didn't select any Servers.");
+  } 
+  else {
+    $N = count($Server);
+    $command = $_POST['command'];
+    echo("You selected $N server(s): ");
+    forEach($Server as $info) {
+        list($first,$second) = explode("/",$info);
+        $instanceId = $first;
+
+        echo "<br>";
+        echo ("Server ID: " . $first) . "<br>";
+        echo ("Server Name: " . $second) . "<br>";
+        //echo "<br>";
+
+        if ($instanceId == "All") {
+          runcommand($command, $token);
+          echo "<br>";
+        }
+    else {
+      runcommand($command, $token, $instanceId);
+      echo "<br>";
+        }
+        }
+    echo "<br>";
+    }
   }
 
-if(array_key_exists('RUNTEST',$_POST))  {
-  $command = $_POST['command'];
-  $instanceId = $_POST['Server'];
-  echo $instanceId;
-  if ($instanceId == "All") {runcommandTest($command, $TestToken);}
-    else {runcommandTest($command, $TestToken, $instanceId);}
+if(array_key_exists('RUNTEST',$_POST)) {
+  $Server = $_POST['Server'];
+  if(empty($Server)) {
+    echo("You didn't select any Servers.");
+  } 
+  else {
+    $N = count($Server);
+    $command = $_POST['command'];
+    echo("You selected $N server(s): ");
+    forEach($Server as $info) {
+        list($first,$second) = explode("/",$info);
+        $instanceId = $first;
+
+        echo "<br>";
+        echo ("Server ID: " . $first) . "<br>";
+        echo ("Server Name: " . $second) . "<br>";
+        //echo "<br>";
+
+        if ($instanceId == "All") {
+          runcommandTest($command, $TestToken);
+          echo "<br>";
+        }
+    else {
+      runcommandTest($command, $TestToken, $instanceId);
+      echo "<br>";
+        }
+        }
+    }
   }
 ?>
 

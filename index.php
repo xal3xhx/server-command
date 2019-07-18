@@ -29,22 +29,65 @@
 </form>
 
 <?php
+if(array_key_exists('RUN',$_POST)) {
+	$Server = $_POST['Server'];
+  if(empty($Server)) {
+    echo("You didn't select any Servers.");
+  } 
+  else {
+    $N = count($Server);
+    $message = $_POST['message'];
+    echo("You selected $N server(s): ");
+    forEach($Server as $info) {
+        list($first,$second) = explode("/",$info);
+        $instanceId = $first;
 
-// checks if button is pressed
-if(array_key_exists('RUN',$_POST))  {
-  $message = $_POST['message'];
-  $instanceId = $_POST['Server'];
-  echo $instanceId;
-  if ($instanceId == "All") {runcommand('/silent-command game.print("' . $message . '")', $token);}
-    else {runcommand('/silent-command game.print("' . $message . '")', $token, $instanceId);}
+        echo "<br>";
+        echo ("Server ID: " . $first) . "<br>";
+        echo ("Server Name: " . $second) . "<br>";
+        //echo "<br>";
+
+        if ($instanceId == "All") {
+        	runcommand('/silent-command game.print("' . $message . '")', $token);
+        	echo "<br>";
+        }
+    else {
+    	runcommand('/silent-command game.print("' . $message . '")', $token, $instanceId);
+    	echo "<br>";
+    		}
+        }
+    echo "<br>";
+    }
   }
 
-if(array_key_exists('RUNTEST',$_POST))  {
-  $message = $_POST['message'];
-  $instanceId = $_POST['Server'];
-  echo $instanceId;
-  if ($instanceId == "All") {runcommandTest('/silent-command game.print("' . $message . '")', $Testtoken);}
-    else {runcommandTest('/silent-command game.print("' . $message . '")', $TestToken, $instanceId);}
+if(array_key_exists('RUNTEST',$_POST)) {
+	$Server = $_POST['Server'];
+  if(empty($Server)) {
+    echo("You didn't select any Servers.");
+  } 
+  else {
+    $N = count($Server);
+    $message = $_POST['message'];
+    echo("You selected $N server(s): ");
+    forEach($Server as $info) {
+        list($first,$second) = explode("/",$info);
+        $instanceId = $first;
+
+        echo "<br>";
+        echo ("Server ID: " . $first) . "<br>";
+        echo ("Server Name: " . $second) . "<br>";
+        //echo "<br>";
+
+        if ($instanceId == "All") {
+        	runcommandTest('/silent-command game.print("' . $message . '")', $TestToken);
+        	echo "<br>";
+        }
+    else {
+    	runcommandTest('/silent-command game.print("' . $message . '")', $TestToken, $instanceId);
+    	echo "<br>";
+    		}
+        }
+    }
   }
 ?>
 

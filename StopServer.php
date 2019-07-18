@@ -15,7 +15,6 @@
 
 
 <div class="container" id="main-content">
-  <h2>CURRENTLY IN DEVELOPMENT</h2>
   <h2>This Will Start all selected servers.</h2>
 
 <form name="form" action="" method="post">
@@ -27,18 +26,21 @@
 // checks if button is pressed
 if(array_key_exists('Start',$_POST)) {
   $Server = $_POST['Server'];
-  if(empty($Server)) {
+  if(empty($Server)) 
+  {
     echo("You didn't select any Servers.");
   } 
-  else {
+  else
+  {
     $N = count($Server);
-    echo("You selected $N server(s): ");
-      forEach($Server as $info) {
-        list($first,$second) = explode("/",$info);
-        echo "<br>";
-        echo ($first) . "<br>";
-        echo ($second) . "<br>";
-        echo "<br>";
+
+    echo("You selected $N door(s): ");
+    for($i=0; $i < $N; $i++)
+    {
+      //echo($Server[$i] . " ");
+      //echo explode("/",$Server);
+      //$a = implode("/", $Server[$i]) . " ";
+      //print_r($Server);
     }
   }
 }
